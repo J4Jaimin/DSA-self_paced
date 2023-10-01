@@ -13,6 +13,8 @@ int power(int x, int n)
     return pow;
 }
 
+// but here space complexity is  O(logn).
+
 int powerEfficient(int x, int n)
 {
     if (n == 1)
@@ -29,11 +31,37 @@ int powerEfficient(int x, int n)
     }
 }
 
+// Efficent solution with space complexity O(1) and time complexity O(logn).
+
+int powerIterativeEfficient(int x, int n)
+{
+
+    if (n == 1)
+    {
+        return x;
+    }
+
+    int res = 1;
+
+    while (n > 0)
+    {
+        if (n & 1 == 1)
+        {
+            res *= x;
+        }
+
+        n /= 2;
+        x *= x;
+    }
+
+    return res;
+}
+
 int main()
 {
     int x, n;
     cin >> x >> n;
 
-    cout << powerEfficient(x, n);
+    cout << powerIterativeEfficient(x, n);
     return 0;
 }
