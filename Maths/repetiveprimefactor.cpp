@@ -121,12 +121,63 @@ void getPrimeFactorEfficient(int n)
     // return primeFactor;
 }
 
+void getPrimeFactorsUsingSieveOfEretosthenes(int n)
+{
+    vector<bool> isPrime(n + 1, true);
+    vector<int> lowestPrime(n + 1, 0);
+    vector<int> highestPrime(n + 1, 0);
+
+    isPrime[0] = isPrime[1] = false;
+
+    for (int i = 2; i * i <= n; i++)
+    {
+        if (isPrime[i])
+        {
+            lowestPrime[i] = highestPrime[i] = i;
+
+            for (int j = 2 * i; j <= n; j += i)
+            {
+                isPrime[j] = false;
+                highestPrime[j] = i;
+                if (lowestPrime[j] == 0)
+                    lowestPrime[j] = i;
+            }
+        }
+    }
+
+    for (int i = 2; i <= n; i++)
+    {
+        if (isPrime[i])
+        {
+            cout << i << " ";
+        }
+    }
+
+    // vector<int> primeFactors;
+
+    // while (n > 1)
+    // {
+    //     int prime_factor = lowestPrime[n];
+
+    //     while (n % prime_factor == 0)
+    //     {
+    //         n /= prime_factor;
+    //         primeFactors.push_back(prime_factor);
+    //     }
+    // }
+
+    // for (int i = 0; i < primeFactors.size(); i++)
+    // {
+    //     cout << primeFactors[i] << " ";
+    // }
+}
+
 int main()
 {
     int n;
     cin >> n;
 
-    getRepetivePrimeFactorOptimized(n);
+    getPrimeFactorsUsingSieveOfEretosthenes(n);
 
     // for (int i = 0; i < repetivePrimeFactor.size(); i++)
     // {

@@ -61,6 +61,30 @@ void allDivisorsOfNEfficient(int n)
     }
 }
 
+int isPerfectNumber(long long N)
+{
+    // code here
+
+    int sumOfFactor = 0;
+
+    for (int i = 1; i * i <= N; i++)
+    {
+        if (N % i == 0)
+        {
+            sumOfFactor += i;
+
+            if (N / i != N)
+                sumOfFactor += N / i;
+        }
+    }
+
+    if (N == sumOfFactor)
+        return 1;
+
+    else
+        return 0;
+}
+
 void allDivisorsOfNSorted(int n)
 {
     int i;
@@ -90,6 +114,6 @@ int main()
     int n;
     cin >> n;
 
-    allDivisorsOfNSorted(n);
+    cout << isPerfectNumber(n);
     return 0;
 }
